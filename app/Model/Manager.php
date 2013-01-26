@@ -5,7 +5,7 @@ App::uses('AppModel', 'Model');
  *
  * @property Dir $Dir
  */
-class City extends AppModel {
+class Manager extends AppModel {
 
 /**
  * Display field
@@ -30,7 +30,17 @@ class City extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-                'state' => array(
+                'type' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'este campo não pode estar vazio',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+                'link' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				'message' => 'este campo não pode estar vazio',
@@ -41,5 +51,8 @@ class City extends AppModel {
 			),
 		),
 	);
-        
+
+	//The Associations below have been created with all possible keys, those that are not needed can be removed
+
+
 }

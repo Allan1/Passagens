@@ -1,5 +1,20 @@
-<!-- File: /app/View/Citys/view.ctp -->
-
-<h1><?php echo $city['City']['name']?></h1>
-
-<p><?php echo $city['City']['state']?></p>
+<div>
+<h2><?php  echo __('City'); ?></h2>
+	<dl>
+		<dt><?php echo __('Id'); ?></dt>
+		<dd>
+			<?php echo h($city['City']['id']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Name'); ?></dt>
+		<dd>
+			<?php echo h($city['City']['name']); ?>
+			&nbsp;
+		</dd>
+                <dt><?php echo __('Estado'); ?></dt>
+		<dd>
+			<?php echo h($city['City']['type']); ?>
+			&nbsp;
+		</dd>
+	</dl>
+</div>
