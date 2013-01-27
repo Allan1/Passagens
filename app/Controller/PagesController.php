@@ -69,7 +69,9 @@ class PagesController extends AppController {
 		if (!empty($path[$count - 1])) {
 			$title_for_layout = Inflector::humanize($path[$count - 1]);
 		}
-		$this->set(compact('page', 'subpage', 'title_for_layout'));
+                $this->loadModel('City');
+                $cities = $this->City->find('list');
+		$this->set(compact('page', 'subpage', 'title_for_layout','cities'));
 		$this->render(implode('/', $path));
 	}
 }

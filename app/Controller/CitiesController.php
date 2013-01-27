@@ -13,8 +13,13 @@ class CitiesController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->City->recursive = 0;
-		$this->set('cities', $this->paginate());
+            if($this->request->is('post')){
+                $this->City->id = $this->request->data['City']['city_id'];
+                $this->redirect(array('action'=>'view',$this->City->field('name'), null));
+            }
+
+            $this->City->recursive = 0;
+            $this->set('cities', $this->paginate());
 	}
 
 /**
@@ -24,12 +29,12 @@ class CitiesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
-		$this->City->id = $id;
-		if (!$this->City->exists()) {
-			throw new NotFoundException(__('Invalid city'));
-		}
-		$this->set('city', $this->City->read(null, $id));
+	public function view($name = null, $data = null) {
+            $city = $this->City->findByName($name);
+            if (!$city) {
+                    throw new NotFoundException(__('Cidade inválida'));
+            }
+            $this->set('city', $city);
 	}
 
 /**
