@@ -23,7 +23,7 @@ class Manager extends AppModel {
 		'name' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				'message' => 'este campo não pode estar vazio',
+				'message' => 'Este campo não pode estar vazio',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -33,7 +33,7 @@ class Manager extends AppModel {
                 'type' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				'message' => 'este campo não pode estar vazio',
+				'message' => 'Este campo não pode estar vazio',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -43,7 +43,7 @@ class Manager extends AppModel {
                 'link' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				'message' => 'este campo não pode estar vazio',
+				'message' => 'Este campo não pode estar vazio',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule

@@ -41,10 +41,10 @@ class ManagersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Manager->create();
 			if ($this->Manager->save($this->request->data)) {
-				$this->Session->setFlash(__(' manager foi salvo com sucesso'));
+				$this->Session->setFlash(__(' Gerenciador salvo com sucesso'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__(' manager não pôde ser salvo. Por favor, tente novamente.'));
+				$this->Session->setFlash(__(' O gerenciador não pôde ser salvo. Por favor, tente novamente.'));
 			}
 		}
 	}
@@ -63,10 +63,10 @@ class ManagersController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Manager->save($this->request->data)) {
-				$this->Session->setFlash(__(' manager foi salvo com sucesso'));
+				$this->Session->setFlash(__(' Gerenciador salvo com sucesso'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__(' manager não pôde ser salvo. Por favor, tente novamente.'));
+				$this->Session->setFlash(__(' O gerenciador não pôde ser salvo. Por favor, tente novamente.'));
 			}
 		} else {
 			$this->request->data = $this->Manager->read(null, $id);
@@ -94,7 +94,7 @@ class ManagersController extends AppController {
 			$this->Session->setFlash(__('Manager deletado'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Manager não foi deletado'));
+		$this->Session->setFlash(__('O gerenciador não foi excluído, por favor, tente novamente'));
 		$this->redirect(array('action' => 'index'));
 	}
 }

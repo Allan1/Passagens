@@ -23,7 +23,7 @@ class City extends AppModel {
 		'name' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				'message' => 'este campo não pode estar vazio',
+				'message' => 'Este campo não pode estar vazio',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -33,7 +33,7 @@ class City extends AppModel {
                 'state' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				'message' => 'este campo não pode estar vazio',
+				'message' => 'Este campo não pode estar vazio',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
