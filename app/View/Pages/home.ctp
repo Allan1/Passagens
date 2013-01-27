@@ -5,10 +5,11 @@ if (Configure::read('debug') == 0):
 endif;
 App::uses('Debugger', 'Utility');
 ?>
-<div>
+<div id="home" style="background-color: whitesmoke; width: 30%; min-height:300px; margin: 0 auto">
     <?php 
         echo $this->Form->create('City',array('action'=>'index'));
         echo $this->Form->input('city_id',array('label'=>'Selecione seu destino','options'=>$cities));
+        echo '[Mais parâmetros]';
         echo $this->Form->end('Buscar');
     ?>
 </div>
