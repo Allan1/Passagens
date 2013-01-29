@@ -39,10 +39,18 @@ $cakeDescription = __d('cake_dev', 'Nome do Projeto');
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, '/'); ?></h1>
+			<h1 style="float: left"><?php echo $this->Html->link($cakeDescription, '/'); ?></h1>
+                        <h1 style="float: right; background: none">
+                            <?php 
+                                if($this->Session->read('Auth.User.id'))
+                                    echo $this->Html->link('sair',array('controller'=>'users','action'=>'logout'));
+                                else
+                                    echo $this->Html->link('entrar',array('controller'=>'users','action'=>'login'));
+                            ?>
+                        </h1>
+                        <div style="clear: both"></div>
 		</div>
 		<div id="content">
-
 			<?php echo $this->Session->flash(); ?>
 
 			<?php echo $this->fetch('content'); ?>

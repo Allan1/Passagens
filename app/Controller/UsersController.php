@@ -8,7 +8,7 @@ App::uses('AppController', 'Controller');
  * @property User $User
  */
 class UsersController extends AppController {
-
+    var $layout = 'config';
     /**
      * beforeFilter method
      * 
@@ -16,7 +16,7 @@ class UsersController extends AppController {
      */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('add');
+        //$this->Auth->allow('add');
     }
     
     /**
@@ -25,6 +25,7 @@ class UsersController extends AppController {
      * @return void
      */
     public function login() {
+        $this->layout = 'default';
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 $this->redirect($this->Auth->redirect());

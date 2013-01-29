@@ -6,7 +6,7 @@ App::uses('AppController', 'Controller');
  * @property Manager $Manager
  */
 class ManagersController extends AppController {
-	
+    var $layout = 'config';
 /**
  * index method
  *

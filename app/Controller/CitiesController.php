@@ -6,7 +6,16 @@ App::uses('AppController', 'Controller');
  * @property City $City
  */
 class CitiesController extends AppController {
-	
+    var $layout = 'config';
+    /**
+     * beforeFilter method
+     * 
+     * @return void
+     */
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('index','view');
+    }
 /**
  * index method
  *

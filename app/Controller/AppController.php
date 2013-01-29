@@ -46,6 +46,6 @@ class AppController extends Controller {
     public function beforeFilter() {
         //It Allow pages with the type index and view.
         //Provisóriamente, permitindo algumas áreas acessíveis. 
-        $this->Auth->allow('index', 'view', 'home', 'edit');   
+        //$this->Auth->allow('index', 'view', 'home', 'edit');   
     }
 }

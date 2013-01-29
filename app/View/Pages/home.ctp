@@ -1,3 +1,13 @@
+<style>
+    body{
+/*        background-image: url('http://localhost/projeto/app/webroot/img/bg.jpg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;*/
+    }
+    #content{
+/*        background: transparent;*/
+    }
+</style>
 <?php
 
 if (Configure::read('debug') == 0):
@@ -5,7 +15,7 @@ if (Configure::read('debug') == 0):
 endif;
 App::uses('Debugger', 'Utility');
 ?>
-<div id="home" style="background-color: whitesmoke; width: 30%; min-height:300px; margin: 0 auto">
+<div id="home">
     <?php 
         echo $this->Form->create('City',array('action'=>'index'));
         echo $this->Form->input('city_id',array('label'=>'Selecione seu destino','options'=>$cities));

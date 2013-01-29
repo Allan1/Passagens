@@ -758,3 +758,35 @@ input[type='submit']{
     width: 100%; background-color: whitesmoke;
     margin-bottom: 10px;
 }
+#home{
+    background-color: whitesmoke; 
+    width: 30%; 
+    min-height:300px; 
+    margin: 0 auto; 
+/*     Fallback for web browsers that doesn't support RGBa 
+    background: rgb(255, 255, 255);
+     RGBa with 0.6 opacity 
+    background: rgba(255, 255, 255, 0.8);*/
+    border: 1px solid whitesmoke;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+#config{
+    margin: 0 auto; 
+    height: 30px; 
+    list-style: none; 
+    display: inline-block; 
+    line-height: 30px;
+    background-color: whitesmoke;
+    width: 100%;
+    margin-bottom: 10px;
+}
+#config a{
+    text-decoration: none
+}
+#config li{
+    float: left;
+}
+#config li:hover{
+}

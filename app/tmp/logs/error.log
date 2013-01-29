@@ -123,3 +123,33 @@
 #3 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(CitiesController), Object(CakeRequest), Object(CakeResponse))
 #4 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\app\webroot\index.php(93): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #5 {main}
+2013-01-28 02:12:41 Error: [MissingControllerException] Controller class Bg.jpgController could not be found.
+#0 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\app\webroot\index.php(93): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-28 02:13:02 Error: [MissingControllerException] Controller class Bg.jpgController could not be found.
+#0 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\app\webroot\index.php(93): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-01-28 02:29:11 Error: [MissingActionException] Action AppController::index() could not be found.
+#0 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(AppController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\app\webroot\index.php(93): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-01-28 02:29:25 Error: [MissingActionException] Action AppController::webroot() could not be found.
+#0 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#1 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(AppController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\app\webroot\index.php(93): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-01-29 03:07:40 Error: [NotFoundException] Cidade inválida
+#0 [internal function]: CitiesController->view('Feira de Santan...')
+#1 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(CitiesController), Array)
+#2 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#3 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(CitiesController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\app\webroot\index.php(93): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2013-01-29 03:08:34 Error: [NotFoundException] Cidade inválida
+#0 [internal function]: CitiesController->view('Feira')
+#1 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\lib\Cake\Controller\Controller.php(485): ReflectionMethod->invokeArgs(Object(CitiesController), Array)
+#2 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\lib\Cake\Routing\Dispatcher.php(186): Controller->invokeAction(Object(CakeRequest))
+#3 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\lib\Cake\Routing\Dispatcher.php(161): Dispatcher->_invoke(Object(CitiesController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\Program Files\EasyPHP-5.3.8.0\www\projeto\app\webroot\index.php(93): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
