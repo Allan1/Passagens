@@ -46,7 +46,7 @@
 <div class="column">
     <div style="min-height: 170px">
         Clima
-<!--        <iframe src='http://selos.climatempo.com.br/selos/MostraSelo.php?CODCIDADE=56&SKIN=padrao' scrolling='no' frameborder='0' width=150 height='170' marginheight='0' marginwidth='0'></iframe>-->
+        <iframe allowtransparency="true" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" src="http://www.cptec.inpe.br/widget/widget.php?p=242&w=h&c=607065&f=ffffff" height="200px" width="215px"></iframe><noscript>Previs&atilde;o de <a href="http://www.cptec.inpe.br/cidades/tempo/242">Salvador/BA</a> oferecido por <a href="http://www.cptec.inpe.br">CPTEC/INPE</a></noscript>
     </div>
     <div style="height: 400px">
         Notícias

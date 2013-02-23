@@ -1,29 +1,24 @@
 <div>
-<h2><?php  echo __('User'); ?></h2>
+<h2><?php  echo __('Usuário'); ?></h2>
 	<dl>
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>
 			<?php echo h($user['User']['id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Name'); ?></dt>
+		<dt><?php echo __('Nome'); ?></dt>
 		<dd>
-			<?php echo h($user['User']['fullName']); ?>
+			<?php echo h($user['User']['name']); ?>
 			&nbsp;
 		</dd>
-                <dt><?php echo __('Role'); ?></dt>
+                <dt><?php echo __('Papel'); ?></dt>
 		<dd>
-			<?php echo h($user['User']['role']); ?>
+			<?php echo h($user['Role']['name']); ?>
 			&nbsp;
 		</dd>
                 <dt><?php echo __('Username'); ?></dt>
 		<dd>
-			<?php echo h($user['User']['login']); ?>
-			&nbsp;
-		</dd>
-                <dt><?php echo __('Password'); ?></dt>
-		<dd>
-			<?php echo h($user['User']['password']); ?>
+			<?php echo h($user['User']['username']); ?>
 			&nbsp;
 		</dd>
 	</dl>
