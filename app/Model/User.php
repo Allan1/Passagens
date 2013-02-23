@@ -37,7 +37,7 @@ class User extends AppModel {
      * @var array
      */
     public $validate = array(
-        'fullName' => array(
+        'name' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => 'Este campo é obrigatório'
@@ -59,12 +59,12 @@ class User extends AppModel {
                 'message' => 'Este campo é obrigatório.'
             )
         ),
-        'role' => array(
-            'valid' => array(
-                'rule' => array('inList', array('admin')),
-                'message' => 'Por favor, insira um papel válido',
-                'allowEmpty' => false
-            )
-        )
+    );
+    
+    public $belongsTo = array(
+        	'Role' => array(
+                    'className' => 'Role',
+                    'foreignKey' => 'role_id',
+                )
     );
 }
