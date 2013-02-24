@@ -1,3 +1,17 @@
+<?php
+    echo $this->Html->script('jquery-ui');    
+    echo $this->Html->css('jquery-ui');
+?>
+<script>
+    $(function() {
+            var availableTags = [
+                <?php echo $sugestion_name; ?>
+            ];
+            $( "#CityName" ).autocomplete({
+                    source: availableTags
+            });
+    });
+</script>
 <style>
     body{
 /*        background-image: url('http://localhost/projeto/app/webroot/img/bg.jpg');
@@ -9,7 +23,6 @@
     }
 </style>
 <?php
-
 if (Configure::read('debug') == 0):
 	throw new NotFoundException();
 endif;
@@ -17,8 +30,8 @@ App::uses('Debugger', 'Utility');
 ?>
 <div id="home">
     <?php 
-        echo $this->Form->create('City',array('action'=>'index'));
-        echo $this->Form->input('city_id',array('label'=>'Selecione seu destino','options'=>$cities));
+        echo $this->Form->create('City',array('action'=>'view'));
+        echo $this->Form->input('name',array('label'=>'Qual o seu destino?'));
         echo '[Mais parâmetros]';
         echo $this->Form->end('Buscar');
     ?>

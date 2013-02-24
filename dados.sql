@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- Extraindo dados da tabela `cities`
 --
 
-INSERT INTO `cities` (`id`, `name`, `state`) VALUES
-(1, 'Salvador', 'BA'),
-(2, 'São Paulo', 'SP'),
-(3, 'Rio de Janeiro', 'RJ');
+INSERT INTO `cities` (`id`, `name`, `state`, `access`) VALUES
+(1, 'Salvador', 'BA',0),
+(2, 'São Paulo', 'SP',0),
+(3, 'Rio de Janeiro', 'RJ',0);
 
 --
 -- Extraindo dados da tabela `managers`

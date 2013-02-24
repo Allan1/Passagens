@@ -76,4 +76,14 @@ class City extends AppModel {
                 $options['conditions'][]= 'Manager.managers_type_id = '.$managers_type;
             return $this->find('all',$options);
         }
+        
+        public function rankingCities() {
+            $result = $this->query("
+                            SELECT id, name, access, @prev := @curr , @curr := access, @rank := IF( @prev = @curr , @rank , @rank +1 ) AS rank 
+                            FROM cities AS City, ( 
+                                SELECT @curr := NULL , @prev := NULL , @rank :=0
+                            )sel1 ORDER BY access DESC
+                        ");
+            return $result;
+        }
 }

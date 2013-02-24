@@ -12,6 +12,7 @@ CREATE  TABLE IF NOT EXISTS `projeto`.`cities` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
   `state` VARCHAR(45) NOT NULL ,
+  `access` INT NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 

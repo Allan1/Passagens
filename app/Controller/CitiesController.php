@@ -14,7 +14,7 @@ class CitiesController extends AppController {
      */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index','view');
+        $this->Auth->allow('view');
     }
 /**
  * index method
@@ -22,11 +22,6 @@ class CitiesController extends AppController {
  * @return void
  */
 	public function index() {
-            if($this->request->is('post')){
-                $this->City->id = $this->request->data['City']['city_id'];
-                $this->redirect(array('action'=>'view',$this->City->field('name'), null));
-            }
-
             $this->City->recursive = 0;
             $this->set('cities', $this->paginate());
 	}
@@ -39,16 +34,30 @@ class CitiesController extends AppController {
  * @return void
  */
 	public function view($name = null, $data = null) {
-            $city = $this->City->findByName($name);
+            if($this->request->is('post')){
+                $city = $this->City->findByName($this->request->data['City']['name']);
+            }
+            else
+                $city = $this->City->findByName($name);
+            
             if (!$city) {
                     throw new NotFoundException(__('Cidade inválida'));
             }
+            $city['City']['access']++;
+            $this->City->save($city);
+            $cities = $this->City->find('list', array('order' => 'City.name ASC'));
+            $sugestion_name = '';
+            foreach ($cities as $city2) {
+                $sugestion_name .= '{label:"' . $city2 . '"},';
+            }
+            $ranking_cities = $this->City->rankingCities();
+            $this->set(compact('ranking_cities'));
             $this->set('city', $city);
             $this->set('hotels',$this->City->findManagers($city['City']['id'],1));
             $this->set('climate',$this->City->findManagers($city['City']['id'],2));
             $this->set('passages',$this->City->findManagers($city['City']['id'],3));
             $this->set('news',$this->City->findManagers($city['City']['id'],4));
-            $this->set('cities',  $this->City->find('list'));
+            $this->set('sugestion_name',  $sugestion_name);
 	}
 
 /**

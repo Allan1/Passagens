@@ -79,8 +79,12 @@ class PagesController extends AppController {
 			$title_for_layout = Inflector::humanize($path[$count - 1]);
 		}
                 $this->loadModel('City');
-                $cities = $this->City->find('list');
-		$this->set(compact('page', 'subpage', 'title_for_layout','cities'));
+                $cities = $this->City->find('list', array('order' => 'City.name ASC'));
+                $sugestion_name = '';
+                foreach ($cities as $city) {
+                $sugestion_name .= '{label:"' . $city . '"},';
+                }
+		$this->set(compact('page', 'subpage', 'title_for_layout','sugestion_name'));
 		$this->render(implode('/', $path));
 	}
 }
