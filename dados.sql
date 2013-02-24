@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tempo de Geração: 23/02/2013 às 00h58min
+-- Tempo de Geração: 24/02/2013 às 05h30min
 -- Versão do Servidor: 5.5.25
 -- Versão do PHP: 5.3.8
 
@@ -27,25 +27,41 @@ SET time_zone = "+00:00";
 
 INSERT INTO `cities` (`id`, `name`, `state`) VALUES
 (1, 'Salvador', 'BA'),
-(2, 'São Paulo', 'SP');
+(2, 'São Paulo', 'SP'),
+(3, 'Rio de Janeiro', 'RJ');
+
+--
+-- Extraindo dados da tabela `managers`
+--
+
+INSERT INTO `managers` (`id`, `name`, `link`, `managers_type_id`) VALUES
+(1, 'Hoteis.com', 'http://www.hoteis.com/cidade/***', 1),
+(2, 'cptec.inpe.br', '<iframe allowtransparency="true" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" src="http://www.cptec.inpe.br/widget/widget.php?p=***&w=h&c=607065&f=ffffff" height="200px" width="215px"></iframe>', 2),
+(3, 'teste', 'www.teste.com/***', 1),
+(4, 'decolar.com', 'http://www.decolar.com/hoteis/hl/***/', 1);
+
+--
+-- Extraindo dados da tabela `managers_shorts`
+--
+
+INSERT INTO `managers_shorts` (`id`, `manager_id`, `short_id`) VALUES
+(1, 2, 2),
+(2, 1, 3),
+(5, 2, 4),
+(6, 4, 1),
+(7, 4, 5),
+(8, 4, 7),
+(9, 2, 6);
 
 --
 -- Extraindo dados da tabela `managers_types`
 --
 
 INSERT INTO `managers_types` (`id`, `name`) VALUES
-(1, 'hoteis'),
 (2, 'clima'),
-(3, 'passagens'),
-(4, 'notícias');
-
---
--- Extraindo dados da tabela `managers`
---
-
-INSERT INTO `managers` (`id`, `name`, `managers_type_id`, `link`) VALUES
-(1, 'Hoteis.com', 1, 'www.hoteis.com/cidade/***'),
-(2, 'cptec.inpe.br',2, '<iframe allowtransparency="true" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" src="http://www.cptec.inpe.br/widget/widget.php?p=***&w=h&c=607065&f=ffffff" height="200px" width="215px"></iframe><noscript>Previs&atilde;o de <a href="http://www.cptec.inpe.br/cidades/tempo/***"></a> oferecido por <a href="http://www.cptec.inpe.br">CPTEC/INPE</a></noscript>');
+(1, 'hoteis'),
+(4, 'notícias'),
+(3, 'passagens');
 
 --
 -- Extraindo dados da tabela `roles`
@@ -55,6 +71,18 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 (1, 'Administrador'),
 (2, 'Gerente');
 
+--
+-- Extraindo dados da tabela `shorts`
+--
+
+INSERT INTO `shorts` (`id`, `name`, `city_id`) VALUES
+(1, 'SSA', 1),
+(2, '242', 1),
+(3, 'SP', 2),
+(4, '244', 2),
+(5, 'sao', 2),
+(6, '241', 3),
+(7, 'rio', 3);
 
 --
 -- Extraindo dados da tabela `users`
@@ -63,7 +91,6 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `role_id`) VALUES
 (1, 'Alonzo Church', 'admin', '59c9a45fe666b141151a27c7cc07064d3aa4b4bf', 1),
 (2, 'David Hilbert', 'hilbert', '59c9a45fe666b141151a27c7cc07064d3aa4b4bf', 2);
-
 SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
