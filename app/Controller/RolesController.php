@@ -6,7 +6,7 @@ App::uses('AppController', 'Controller');
  * @property Role $Role
  */
 class RolesController extends AppController {
-
+    var $layout = 'config';
 	
 /**
  * index method

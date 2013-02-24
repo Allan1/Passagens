@@ -39,17 +39,26 @@
     <div style="height: 400px;">
         Passagens
     </div>
-    <div style="height: 127px;">
-       ...
+    <div style="height: 127px;">Hotéis </br>
+       <?php 
+        foreach ($hotels as $value) {
+            echo $this->Html->link($value['Manager']['name'],str_replace('***', $value['Short']['name'], $value['Manager']['link']))."</br>";
+            
+        }
+        ?>
     </div>
 </div>
 <div class="column">
-    <div style="min-height: 170px">
-        Clima
-        <iframe allowtransparency="true" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" src="http://www.cptec.inpe.br/widget/widget.php?p=242&w=h&c=607065&f=ffffff" height="200px" width="215px"></iframe><noscript>Previs&atilde;o de <a href="http://www.cptec.inpe.br/cidades/tempo/242">Salvador/BA</a> oferecido por <a href="http://www.cptec.inpe.br">CPTEC/INPE</a></noscript>
+    <div id="clima" style="min-height: 190px">
+        <?php 
+            foreach ($climate as $value) {
+                echo (str_replace('***', $value['Short']['name'], $value['Manager']['link']));
+            }
+        ?>
     </div>
     <div style="height: 400px">
         Notícias
+    
     </div>
     <div style="">
        ...

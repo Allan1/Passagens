@@ -13,8 +13,10 @@
 		<td><?php echo h($city['City']['name']); ?>&nbsp;</td>
                 <td><?php echo h($city['City']['state']); ?>&nbsp;</td>
                 <td class="actions">
-			<?php echo $this->Html->link(__('editar'), array('action' => 'edit', $city['City']['id'])); ?>
-			<?php echo $this->Form->postLink(__('excluir'), array('action' => 'delete', $city['City']['id']), null, __('Tem certeza que deseja deletar # %s?', $city['City']['id'])); ?>
+                    <?php echo $this->Html->link(__('ver'), array('action' => 'view', $city['City']['name'])); ?>
+                    <?php echo $this->Html->link(__('abreviações'), array('controller'=>'shorts','action' => 'index', $city['City']['id'])); ?>
+                    <?php echo $this->Html->link(__('editar'), array('action' => 'edit', $city['City']['id'])); ?>
+                    <?php echo $this->Form->postLink(__('excluir'), array('action' => 'delete', $city['City']['id']), null, __('Tem certeza que deseja deletar # %s?', $city['City']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

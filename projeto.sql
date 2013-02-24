@@ -63,7 +63,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `projeto`.`managers` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
-  `link` VARCHAR(250) NOT NULL ,
+  `link` TEXT NOT NULL ,
   `managers_type_id` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_managers_managers_types1` (`managers_type_id` ASC) ,
@@ -76,9 +76,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `projeto`.`short`
+-- Table `projeto`.`shorts`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `projeto`.`short` (
+CREATE  TABLE IF NOT EXISTS `projeto`.`shorts` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
   `city_id` INT NOT NULL ,
@@ -109,7 +109,7 @@ CREATE  TABLE IF NOT EXISTS `projeto`.`managers_shorts` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_managers_shorts_short1`
     FOREIGN KEY (`short_id` )
-    REFERENCES `projeto`.`short` (`id` )
+    REFERENCES `projeto`.`shorts` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

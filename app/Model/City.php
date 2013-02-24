@@ -42,4 +42,38 @@ class City extends AppModel {
 		),
 	);
         
+        public $hasMany = array(
+		'Short' => array(
+			'className' => 'Short',
+			'foreignKey' => 'city_id',
+		)
+	);
+        
+        public function findManagers($id =null, $managers_type = null) {
+            $this->recursive = -1;
+            $options = array(
+                'fields'=>'Manager.*,Short.*',
+                'conditions'=>array('City.id ='.$id),
+                'joins'=>array(
+                    array(
+                        'table'=>'shorts',
+                        'alias'=>'Short',
+                        'conditions'=>'Short.city_id = City.id'
+                    ),
+                    array(
+                        'table'=>'managers_shorts',
+                        'alias'=>'ManagersShort',
+                        'conditions'=>'ManagersShort.short_id = Short.id'
+                    ),
+                    array(
+                        'table'=>'managers',
+                        'alias'=>'Manager',
+                        'conditions'=>'ManagersShort.manager_id = Manager.id'
+                    ),
+                )
+            );
+            if($managers_type)
+                $options['conditions'][]= 'Manager.managers_type_id = '.$managers_type;
+            return $this->find('all',$options);
+        }
 }

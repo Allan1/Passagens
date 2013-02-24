@@ -53,6 +53,40 @@ class Manager extends AppModel {
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
-
+    public $belongsTo = array(
+        'ManagersType' => array(
+            'className' => 'ManagersType',
+            'foreignKey' => 'managers_type_id',
+        )
+    );
+    
+    public $hasAndBelongsToMany = array(
+        'Short' =>
+            array(
+                'className'              => 'Short',
+                'joinTable'              => 'managers_shorts',
+                'foreignKey'             => 'manager_id',
+                'associationForeignKey'  => 'short_id',
+            )
+    );
+    
+    public function findManagersUnrelatedToShort($short_id) {
+        $this->recursive=-1;
+        $all = $this->find('list', array(
+            'conditions'=>array(('ManagersShort.short_id ='.$short_id)),
+            'joins'=>array(
+                array(
+                    'table'=>'managers_shorts',
+                    'alias'=>'ManagersShort',
+                    'type'=>'inner',
+                    'conditions'=>'ManagersShort.manager_id = Manager.id'
+                ),
+            )
+        ));
+        $options['conditions']=array();
+        foreach ($all as $key => $value) {
+            $options['conditions'][]=('Manager.id <> '.$key);
+        }
+        return $this->find('list',$options);
+    }
 }

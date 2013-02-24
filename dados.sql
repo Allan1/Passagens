@@ -34,14 +34,18 @@ INSERT INTO `cities` (`id`, `name`, `state`) VALUES
 --
 
 INSERT INTO `managers_types` (`id`, `name`) VALUES
-(1, 'hoteis');
+(1, 'hoteis'),
+(2, 'clima'),
+(3, 'passagens'),
+(4, 'notícias');
 
 --
 -- Extraindo dados da tabela `managers`
 --
 
 INSERT INTO `managers` (`id`, `name`, `managers_type_id`, `link`) VALUES
-(1, 'Hoteis.com', 1, 'www.hoteis.com/cidade/');
+(1, 'Hoteis.com', 1, 'www.hoteis.com/cidade/***'),
+(2, 'cptec.inpe.br',2, '<iframe allowtransparency="true" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" scrolling="no" src="http://www.cptec.inpe.br/widget/widget.php?p=***&w=h&c=607065&f=ffffff" height="200px" width="215px"></iframe><noscript>Previs&atilde;o de <a href="http://www.cptec.inpe.br/cidades/tempo/***"></a> oferecido por <a href="http://www.cptec.inpe.br">CPTEC/INPE</a></noscript>');
 
 --
 -- Extraindo dados da tabela `roles`

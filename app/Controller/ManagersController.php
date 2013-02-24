@@ -25,6 +25,7 @@ class ManagersController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+            $this->Manager->recursive = 0;
 		$this->Manager->id = $id;
 		if (!$this->Manager->exists()) {
 			throw new NotFoundException(__('Invalid manager'));
@@ -47,6 +48,7 @@ class ManagersController extends AppController {
 				$this->Session->setFlash(__(' O gerenciador não pôde ser salvo. Por favor, tente novamente.'));
 			}
 		}
+                $this->set('managers_types',  $this->Manager->ManagersType->find('list'));
 	}
 
 /**
@@ -57,6 +59,7 @@ class ManagersController extends AppController {
  * @return void
  */
 	public function edit($id = null) {
+            $this->Manager->recursive = 0;
 		$this->Manager->id = $id;
 		if (!$this->Manager->exists()) {
 			throw new NotFoundException(__('Invalid manager'));
@@ -69,7 +72,8 @@ class ManagersController extends AppController {
 				$this->Session->setFlash(__(' O gerenciador não pôde ser salvo. Por favor, tente novamente.'));
 			}
 		} else {
-			$this->request->data = $this->Manager->read(null, $id);
+                    $this->set('managers_types',  $this->Manager->ManagersType->find('list'));
+                    $this->request->data = $this->Manager->read(null, $id);
 		}
 	}
 

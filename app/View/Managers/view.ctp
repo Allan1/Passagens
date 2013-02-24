@@ -13,7 +13,7 @@
 		</dd>
                 <dt><?php echo __('Tipo'); ?></dt>
 		<dd>
-			<?php echo h($manager['Manager']['type']); ?>
+			<?php echo h($manager['ManagersType']['name']); ?>
 			&nbsp;
 		</dd>
                 <dt><?php echo __('Link'); ?></dt>

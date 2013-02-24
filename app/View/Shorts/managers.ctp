@@ -1,6 +1,10 @@
 <div>
-	<h2><?php echo __('Gerenciadores'); ?></h2>
-	<?php echo $this->Html->tag('p',$this->Html->link('adicionar',array('action'=>'add')),array('class'=>'actions')); ?>
+	<h2><?php echo __('Gerenciadores da abreviação "'.$managers['Short']['name'].'"'); ?></h2>
+        <?php if($managers_unrelated): ?>
+            <?php echo $this->Form->create('ManagersShort');?>
+            <?php echo $this->Form->select('manager_id',$managers_unrelated);?>
+            <?php echo $this->Form->end('Associar');?>
+        <?php endif;?>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('name','nome'); ?></th>
@@ -9,14 +13,13 @@
 			<th class="actions"><?php echo __('ações'); ?></th>
 	</tr>
 	<?php
-	foreach ($managers as $manager): ?>
+	foreach ($managers['Manager'] as $manager): ?>
 	<tr>
-		<td><?php echo h($manager['Manager']['name']); ?>&nbsp;</td>
+		<td><?php echo h($manager['name']); ?>&nbsp;</td>
                 <td><?php echo h($manager['ManagersType']['name']); ?>&nbsp;</td>
-                <td><?php echo h($manager['Manager']['link']); ?>&nbsp;</td>
+                <td><?php echo h($manager['link']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('editar'), array('action' => 'edit', $manager['Manager']['id'])); ?>
-			<?php echo $this->Form->postLink(__('excluir'), array('action' => 'delete', $manager['Manager']['id']), null, __('Tem certeza que deseja deletar # %s?', $manager['Manager']['id'])); ?>
+			<?php echo $this->Form->postLink(__('desassociar'), array('controller'=>'managers_shorts','action' => 'delete', $manager['id'], $managers['Short']['id']), null, __('Tem certeza que deseja desassociar "%s"?', $manager['name'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

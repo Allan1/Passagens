@@ -44,6 +44,10 @@ class CitiesController extends AppController {
                     throw new NotFoundException(__('Cidade inválida'));
             }
             $this->set('city', $city);
+            $this->set('hotels',$this->City->findManagers($city['City']['id'],1));
+            $this->set('climate',$this->City->findManagers($city['City']['id'],2));
+            $this->set('passages',$this->City->findManagers($city['City']['id'],3));
+            $this->set('news',$this->City->findManagers($city['City']['id'],4));
             $this->set('cities',  $this->City->find('list'));
 	}
 
