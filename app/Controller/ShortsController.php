@@ -126,7 +126,7 @@ class ShortsController extends AppController {
             if($this->request->is('post')){
                 $this->request->data['ManagersShort']['short_id'] = $id;
                 if($this->Short->ManagersShort->save($this->request->data)){
-                    $this->Session->setFlash('Relação salva com sucesso');
+                    $this->Session->setFlash('Relação salva com sucesso','default',array('class'=>'success'));
                     $this->redirect(array('action'=>'managers',$id));
                 }
                 else

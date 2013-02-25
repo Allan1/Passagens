@@ -34,29 +34,65 @@ class CitiesController extends AppController {
  * @return void
  */
 	public function view($name = null, $data = null) {
+            $hotels =true;
+            $news = true;
+            $passages = false;
+            $climate = TRUE;
             if($this->request->is('post')){
-                $city = $this->City->findByName($this->request->data['City']['name']);
+                $hotels =  $this->request->data['City']['hotels'];
+                $news = $this->request->data['City']['news'];
+                $passages = $this->request->data['City']['passages'];
+                $climate = $this->request->data['City']['climate'];
+                $city = $this->City->findByName($this->request->data['City']['destination']);
+                if($passages)
+                    $city_origin = $this->City->findByName($this->request->data['City']['origin']);
             }
             else
                 $city = $this->City->findByName($name);
             
             if (!$city) {
-                    throw new NotFoundException(__('Cidade inválida'));
+                $this->Session->setFlash('Cidade destino inválida');
+                $this->redirect(('/'));
             }
+            
+            if (($passages)&&!$city_origin) {
+                $this->Session->setFlash('Cidade origem inválida');
+                $this->redirect(('/'));
+            }
+            
             $city['City']['access']++;
             $this->City->save($city);
+            
+            if($passages){
+                $city['City']['from']['dia'] = $this->getDayForDate($this->request->data['City']['from']);
+                $city['City']['from']['mes'] = $this->getMonthForDate($this->request->data['City']['from']);
+                $city['City']['from']['ano'] = $this->getYearForDate($this->request->data['City']['from']);
+                $city['City']['to']['dia'] = $this->getDayForDate($this->request->data['City']['to']);
+                $city['City']['to']['mes'] = $this->getMonthForDate($this->request->data['City']['to']);
+                $city['City']['to']['ano'] = $this->getYearForDate($this->request->data['City']['to']);
+            }
+            
             $cities = $this->City->find('list', array('order' => 'City.name ASC'));
             $sugestion_name = '';
+            
             foreach ($cities as $city2) {
                 $sugestion_name .= '{label:"' . $city2 . '"},';
             }
+            
             $ranking_cities = $this->City->rankingCities();
             $this->set(compact('ranking_cities'));
             $this->set('city', $city);
-            $this->set('hotels',$this->City->findManagers($city['City']['id'],1));
-            $this->set('climate',$this->City->findManagers($city['City']['id'],2));
-            $this->set('passages',$this->City->findManagers($city['City']['id'],3));
-            $this->set('news',$this->City->findManagers($city['City']['id'],4));
+            
+            if ($hotels)
+                $this->set('hotelsList',$this->City->findManagers($city['City']['id'],1));
+            if($climate)
+                $this->set('climateList',$this->City->findManagers($city['City']['id'],2));
+            if ($passages){
+                $passagesList = $this->City->findManagers($city['City']['id'],3,$city_origin['City']['id']);
+                $this->set(compact('passagesList'));
+            }
+            if($news)
+                $this->set('newsList',$this->City->findManagers($city['City']['id'],4));
             $this->set('sugestion_name',  $sugestion_name);
 	}
 
@@ -69,7 +105,7 @@ class CitiesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->City->create();
 			if ($this->City->save($this->request->data)) {
-				$this->Session->setFlash(__(' city foi salvo com sucesso'));
+				$this->Session->setFlash(' city foi salvo com sucesso','default',array('class'=>'success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__(' city não pôde ser salvo. Por favor, tente novamente.'));
@@ -91,10 +127,10 @@ class CitiesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->City->save($this->request->data)) {
-				$this->Session->setFlash(__(' city foi salvo com sucesso'));
+				$this->Session->setFlash('Cidade salva com sucesso','default',array('class'=>'success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__(' city não pôde ser salvo. Por favor, tente novamente.'));
+				$this->Session->setFlash(__('Cidade não pôde ser salva. Por favor, tente novamente.'));
 			}
 		} else {
 			$this->request->data = $this->City->read(null, $id);
@@ -119,7 +155,7 @@ class CitiesController extends AppController {
 		}
 		
 		if ($this->City->delete()) {
-			$this->Session->setFlash(__('City deletado'));
+			$this->Session->setFlash('City deletado com sucesso','default',array('class'=>'success'));
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('City não foi deletado'));

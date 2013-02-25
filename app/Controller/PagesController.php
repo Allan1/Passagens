@@ -54,7 +54,10 @@ class PagesController extends AppController {
         parent::beforeFilter();
         $this->Auth->allow('display');
     }
-/**
+    
+    public $layout ='config';
+
+    /**
  * Displays a view
  *
  * @param mixed What page to display

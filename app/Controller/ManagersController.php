@@ -42,7 +42,7 @@ class ManagersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Manager->create();
 			if ($this->Manager->save($this->request->data)) {
-				$this->Session->setFlash(__(' Gerenciador salvo com sucesso'));
+				$this->Session->setFlash(' Gerenciador salvo com sucesso','default',array('class'=>'success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__(' O gerenciador não pôde ser salvo. Por favor, tente novamente.'));
@@ -66,7 +66,7 @@ class ManagersController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Manager->save($this->request->data)) {
-				$this->Session->setFlash(__(' Gerenciador salvo com sucesso'));
+				$this->Session->setFlash(' Gerenciador salvo com sucesso','default',array('class'=>'success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__(' O gerenciador não pôde ser salvo. Por favor, tente novamente.'));
@@ -95,7 +95,7 @@ class ManagersController extends AppController {
 		}
 		
 		if ($this->Manager->delete()) {
-			$this->Session->setFlash(__('Manager deletado'));
+			$this->Session->setFlash('Gerenciador deletado com sucesso','default',array('class'=>'success'));
 			$this->redirect(array('action' => 'index'));
 		}
 		$this->Session->setFlash(__('O gerenciador não foi excluído, por favor, tente novamente'));

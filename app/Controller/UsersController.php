@@ -76,15 +76,17 @@ class UsersController extends AppController {
      * @return void
      */
     public function add() {
+        
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__(' Usuário salvo com sucesso'));
+                $this->Session->setFlash(__(' Usuário salvo com sucesso'),'default',array('class'=>'success'));
                 $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__(' O usuário não pôde ser salvo. Por favor, tente novamente.'));
             }
         }
+        $this->set('roles',  $this->User->Role->find('list'));
     }
 
     /**
@@ -95,19 +97,21 @@ class UsersController extends AppController {
      * @return void
      */
     public function edit($id = null) {
+        $this->User->recursive=1;
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__(' Usuário salvo com sucesso'));
+                $this->Session->setFlash(__('Usuário salvo com sucesso'),'default',array('class'=>'success'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('  O usuário não pôde ser salvo. Por favor, tente novamente.'));
+                $this->Session->setFlash(__('O usuário não pôde ser salvo. Por favor, tente novamente.'));
             }
         } else {
             $this->request->data = $this->User->read(null, $id);
+            $this->set('roles',  $this->User->Role->find('list'));
         }
     }
 
@@ -130,10 +134,10 @@ class UsersController extends AppController {
         }
 
         if ($this->User->delete()) {
-            $this->Session->setFlash(__('Usuário excluído'));
+            $this->Session->setFlash(__('Usuário excluído com sucesso'),'default',array('class'=>'success'));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__(' O usuário não pôde ser excluído. Por favor, tente novamente.'));
+        $this->Session->setFlash(__('O usuário não pôde ser excluído. Por favor, tente novamente.'));
         $this->redirect(array('action' => 'index'));
     }
 

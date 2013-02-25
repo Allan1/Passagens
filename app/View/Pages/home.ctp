@@ -4,12 +4,60 @@
 ?>
 <script>
     $(function() {
-            var availableTags = [
-                <?php echo $sugestion_name; ?>
-            ];
-            $( "#CityName" ).autocomplete({
-                    source: availableTags
-            });
+        var availableTags = [
+            <?php echo $sugestion_name; ?>
+        ];
+        $( "#CityOrigin" ).autocomplete({
+                source: availableTags
+        });
+        $( "#CityDestination" ).autocomplete({
+                source: availableTags
+        });
+    });
+    $(function() {
+        $( "#CityFrom" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 2,
+            onClose: function( selectedDate ) {
+                $( "#to" ).datepicker( "option", "minDate", selectedDate );
+            }
+        });
+        $( "#CityTo" ).datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 2,
+            onClose: function( selectedDate ) {
+                $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+            }
+        });
+        $( "#CityFrom" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
+        $( "#CityTo" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
+    });
+    
+    $(document).ready(function(){
+        if(!$("#CityPassages").is(':checked')){
+                $('#CityOrigin').parent('div').css('display','none');
+                $('#CityFrom').parent('div').css('display','none');
+                $('#CityTo').parent('div').css('display','none');
+            }
+            else{
+                $('#CityOrigin').parent('div').css('display','block');
+                $('#CityFrom').parent('div').css('display','block');
+                $('#CityTo').parent('div').css('display','block');
+            }
+        $("#CityPassages").click(function(){
+            if(!$(this).is(':checked')){
+                $('#CityOrigin').parent('div').css('display','none');
+                $('#CityFrom').parent('div').css('display','none');
+                $('#CityTo').parent('div').css('display','none');
+            }
+            else{
+                $('#CityOrigin').parent('div').css('display','block');
+                $('#CityFrom').parent('div').css('display','block');
+                $('#CityTo').parent('div').css('display','block');
+            }
+        });
     });
 </script>
 <style>
@@ -31,8 +79,14 @@ App::uses('Debugger', 'Utility');
 <div id="home">
     <?php 
         echo $this->Form->create('City',array('action'=>'view'));
-        echo $this->Form->input('name',array('label'=>'Qual o seu destino?'));
-        echo '[Mais parâmetros]';
+        echo $this->Form->input('destination',array('label'=>'Qual o seu destino?'));
+        echo $this->Form->input('passages',array('label'=>'Passagens','type'=>'checkbox'));
+        echo $this->Form->input('origin',array('label'=>'Onde você está?'));
+        echo $this->Form->input('from',array('label'=>'Partida'));
+        echo $this->Form->input('to',array('label'=>'Retorno'));
+        echo $this->Form->input('hotels',array('label'=>'Hotéis','type'=>'checkbox','checked'=>'checked'));
+        echo $this->Form->input('climate',array('label'=>'Clima','type'=>'checkbox','checked'=>'checked'));
+        echo $this->Form->input('news',array('label'=>'Notícias','type'=>'checkbox','checked'=>'checked'));
         echo $this->Form->end('Buscar');
     ?>
 </div>

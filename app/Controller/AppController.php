@@ -48,4 +48,14 @@ class AppController extends Controller {
         //Provisóriamente, permitindo algumas áreas acessíveis. 
         //$this->Auth->allow('index', 'view', 'home', 'edit');   
     }
+    
+    public function getDayForDate($date) {
+        return substr($date, 0, 2);
+    }
+    public function getMonthForDate($date) {
+        return substr($date, 3, 2);
+    }
+    public function getYearForDate($date) {
+        return substr($date, 6, 4);
+    }
 }
