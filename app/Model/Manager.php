@@ -87,6 +87,12 @@ class Manager extends AppModel {
         foreach ($all as $key => $value) {
             $options['conditions'][]=('Manager.id <> '.$key);
         }
-        return $this->find('list',$options);
+        $result = $this->find('list',$options);
+        $this->recursive = 0;
+        foreach ($result as $key => $value) {
+            $this->id = $key;
+            $result[$key].=' ('.$this->field('ManagersType.name').')';
+        }
+        return $result;
     }
 }

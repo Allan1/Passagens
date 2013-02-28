@@ -1,15 +1,23 @@
 <?php
     echo $this->Html->script('jquery-ui');    
+    echo $this->Html->script('star-rating/jquery.rating');
+    echo $this->Html->script('star-rating/jquery.rating.pack');
+    echo $this->Html->script('star-rating/jquery.MetaData');
+    echo $this->Html->script('star-rating/jquery.form');
+    echo $this->Html->css('../js/star-rating/jquery.rating');
     echo $this->Html->css('jquery-ui');
 ?>
 <script>
     $(function() {
-            var availableTags = [
-                <?php echo $sugestion_name; ?>
-            ];
-            $( "#CityName" ).autocomplete({
-                    source: availableTags
-            });
+        var availableTags = [
+            <?php echo $sugestion_name; ?>
+        ];
+        $( "#CityOrigin" ).autocomplete({
+                source: availableTags
+        });
+        $( "#CityDestination" ).autocomplete({
+                source: availableTags
+        });
     });
     
     $(function() {
@@ -33,6 +41,9 @@
         $( "#CityTo" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
     });
     
+    $(function(){ // wait for document to load
+        $('input.star').rating();
+    });
      $(document).ready(function(){
         if(!$("#CityPassages").is(':checked')){
                 $('#CityOrigin').parent('div').css('display','none');
@@ -106,9 +117,9 @@
     <div id="passages"style="height: 400px;">
         Passagens
         <?php 
+        $i=0;
         foreach ($passagesList as $value) {
-            
-            $aux = $this->Html->link($value['Manager']['name'],  preg_replace('/\*\*\*/', $value['Short']['name'], $value['Manager']['link'], 1));
+            $aux = $this->Html->link($value['Manager']['name'],  preg_replace('/\*\*\*/', $value['Short']['name'], $value['Manager']['link'], 1),array('target'=>'_blank'));
             $aux = preg_replace('/\*\*\*/', $value['Short2']['name'], $aux, 1);
             $aux = preg_replace('/\*ano\*/', $city['City']['from']['ano'], $aux, 1);
             $aux = preg_replace('/\*ano\*/', $city['City']['to']['ano'], $aux, 1);
@@ -116,17 +127,33 @@
             $aux = preg_replace('/\*mes\*/', $city['City']['to']['mes'], $aux, 1);
             $aux = preg_replace('/\*dia\*/', $city['City']['from']['dia'], $aux, 1);
             $aux = preg_replace('/\*dia\*/', $city['City']['to']['dia'], $aux, 1);
-            
             echo '</br>'.$aux;
+            echo '<div class="clear">
+                <input name="passagesStar'.$i.'" type="radio" class="star" value="1" title="Péssimo"/>
+                <input name="passagesStar'.$i.'" type="radio" class="star" value="2" title="Ruim"/>
+                <input name="passagesStar'.$i.'" type="radio" class="star" value="3" title="Regular"/>
+                <input name="passagesStar'.$i.'" type="radio" class="star" value="4" title="Bom"/>
+                <input name="passagesStar'.$i.'" type="radio" class="star" value="5" title="Ótimo"/>
+                </div>
+             ';
+            $i++;
         }
         ?>
     </div>
     <?php    endif;?>
     <?php if(isset($hotelsList)):?>
-    <div style="height: 127px;">Hotéis </br>
+    <div style="height: 127px;">Hotéis
        <?php 
         foreach ($hotelsList as $value) {
-            echo $this->Html->link($value['Manager']['name'],str_replace('***', $value['Short']['name'], $value['Manager']['link']))."</br>";
+            echo "</br>".$this->Html->link($value['Manager']['name'],str_replace('***', $value['Short']['name'], $value['Manager']['link']),array('target'=>'_blank'));
+            echo '<div class="clear">
+                <input name="hotelsStar'.$i.'" type="radio" class="star" value="1" title="Péssimo"/>
+                <input name="hotelsStar'.$i.'" type="radio" class="star" value="2" title="Ruim"/>
+                <input name="hotelsStar'.$i.'" type="radio" class="star" value="3" title="Regular"/>
+                <input name="hotelsStar'.$i.'" type="radio" class="star" value="4" title="Bom"/>
+                <input name="hotelsStar'.$i.'" type="radio" class="star" value="5" title="Ótimo"/>
+                </div>
+             ';
             
         }
         ?>
@@ -157,7 +184,7 @@
     <?php if(isset($newsList)):?>
     <div id="news" style="height: 400px">
         Notícias
-    
+        
     </div>
     <?php endif;?>
     <div style="">
