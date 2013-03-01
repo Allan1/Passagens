@@ -66,6 +66,8 @@ CREATE  TABLE IF NOT EXISTS `projeto`.`managers` (
   `name` VARCHAR(45) NOT NULL ,
   `link` TEXT NOT NULL ,
   `managers_type_id` INT NOT NULL ,
+  `stars` INT NOT NULL DEFAULT 0 ,
+  `reviews` INT NOT NULL DEFAULT 0 ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_managers_managers_types1` (`managers_type_id` ASC) ,
   CONSTRAINT `fk_managers_managers_types1`

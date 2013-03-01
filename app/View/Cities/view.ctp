@@ -41,10 +41,11 @@
         $( "#CityTo" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
     });
     
-    $(function(){ // wait for document to load
-        $('input.star').rating();
-    });
      $(document).ready(function(){
+        $(function(){ // wait for document to load
+            $('input.star').rating();
+        });
+        
         if(!$("#CityPassages").is(':checked')){
                 $('#CityOrigin').parent('div').css('display','none');
                 $('#CityFrom').parent('div').css('display','none');
@@ -127,6 +128,10 @@
             $aux = preg_replace('/\*mes\*/', $city['City']['to']['mes'], $aux, 1);
             $aux = preg_replace('/\*dia\*/', $city['City']['from']['dia'], $aux, 1);
             $aux = preg_replace('/\*dia\*/', $city['City']['to']['dia'], $aux, 1);
+            if($value['Manager']['reviews']==0)
+                $checked_index = 0;
+            else
+                $checked_index = ($value['Manager']['stars']/$value['Manager']['reviews']);
             echo '</br>'.$aux;
             echo '<div class="clear">
                 <input name="passagesStar'.$i.'" type="radio" class="star" value="1" title="Péssimo"/>
@@ -135,6 +140,9 @@
                 <input name="passagesStar'.$i.'" type="radio" class="star" value="4" title="Bom"/>
                 <input name="passagesStar'.$i.'" type="radio" class="star" value="5" title="Ótimo"/>
                 </div>
+                <script>
+                    $("input[name=\"passagesStar'.$i.'\"]:nth-child('.$checked_index.')").attr("checked","checked");
+                </script>
              ';
             $i++;
         }
@@ -143,18 +151,27 @@
     <?php    endif;?>
     <?php if(isset($hotelsList)):?>
     <div style="height: 127px;">Hotéis
+        
        <?php 
+       $i=0;
         foreach ($hotelsList as $value) {
+            if($value['Manager']['reviews']==0)
+                $checked_index = 0;
+            else
+                $checked_index = ($value['Manager']['stars']/$value['Manager']['reviews']);
             echo "</br>".$this->Html->link($value['Manager']['name'],str_replace('***', $value['Short']['name'], $value['Manager']['link']),array('target'=>'_blank'));
             echo '<div class="clear">
                 <input name="hotelsStar'.$i.'" type="radio" class="star" value="1" title="Péssimo"/>
                 <input name="hotelsStar'.$i.'" type="radio" class="star" value="2" title="Ruim"/>
                 <input name="hotelsStar'.$i.'" type="radio" class="star" value="3" title="Regular"/>
-                <input name="hotelsStar'.$i.'" type="radio" class="star" value="4" title="Bom"/>
+                <input name="hotelsStar'.$i.'" type="radio" class="star" value="4" title="Bom" />
                 <input name="hotelsStar'.$i.'" type="radio" class="star" value="5" title="Ótimo"/>
                 </div>
+                <script>
+                    $("input[name=\"hotelsStar'.$i.'\"]:nth-child('.$checked_index.')").attr("checked","checked");
+                </script>
              ';
-            
+            $i++;
         }
         ?>
     </div>
