@@ -61,14 +61,7 @@
     });
 </script>
 <style>
-    body{
-/*        background-image: url('http://localhost/projeto/app/webroot/img/bg.jpg');
-        background-repeat: no-repeat;
-        background-size: 100% 100%;*/
-    }
-    #content{
-/*        background: transparent;*/
-    }
+   
 </style>
 <?php
 if (Configure::read('debug') == 0):

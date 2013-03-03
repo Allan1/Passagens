@@ -115,7 +115,7 @@
         </dl>
     </div>
     <?php if(isset($passagesList)):?>
-    <div id="passages"style="height: 400px;">
+    <div id="passages">
         Passagens
         <?php 
         $i=0;
@@ -134,11 +134,11 @@
                 $checked_index = ($value['Manager']['stars']/$value['Manager']['reviews']);
             echo '</br>'.$aux;
             echo '<div class="clear">
-                <input name="passagesStar'.$i.'" type="radio" class="star" value="1" title="Péssimo"/>
-                <input name="passagesStar'.$i.'" type="radio" class="star" value="2" title="Ruim"/>
-                <input name="passagesStar'.$i.'" type="radio" class="star" value="3" title="Regular"/>
-                <input name="passagesStar'.$i.'" type="radio" class="star" value="4" title="Bom"/>
-                <input name="passagesStar'.$i.'" type="radio" class="star" value="5" title="Ótimo"/>
+                <input name="passagesStar'.$i.'" type="radio" class="star" value="1" title="Péssimo" disabled="disabled"/>
+                <input name="passagesStar'.$i.'" type="radio" class="star" value="2" title="Ruim" disabled="disabled"/>
+                <input name="passagesStar'.$i.'" type="radio" class="star" value="3" title="Regular" disabled="disabled"/>
+                <input name="passagesStar'.$i.'" type="radio" class="star" value="4" title="Bom" disabled="disabled"/>
+                <input name="passagesStar'.$i.'" type="radio" class="star" value="5" title="Ótimo" disabled="disabled"/>
                 </div>
                 <script>
                     $("input[name=\"passagesStar'.$i.'\"]:nth-child('.$checked_index.')").attr("checked","checked");
@@ -150,7 +150,7 @@
     </div>
     <?php    endif;?>
     <?php if(isset($hotelsList)):?>
-    <div style="height: 127px;">Hotéis
+    <div id="hotels">Hotéis
         
        <?php 
        $i=0;
@@ -161,11 +161,11 @@
                 $checked_index = ($value['Manager']['stars']/$value['Manager']['reviews']);
             echo "</br>".$this->Html->link($value['Manager']['name'],str_replace('***', $value['Short']['name'], $value['Manager']['link']),array('target'=>'_blank'));
             echo '<div class="clear">
-                <input name="hotelsStar'.$i.'" type="radio" class="star" value="1" title="Péssimo"/>
-                <input name="hotelsStar'.$i.'" type="radio" class="star" value="2" title="Ruim"/>
-                <input name="hotelsStar'.$i.'" type="radio" class="star" value="3" title="Regular"/>
-                <input name="hotelsStar'.$i.'" type="radio" class="star" value="4" title="Bom" />
-                <input name="hotelsStar'.$i.'" type="radio" class="star" value="5" title="Ótimo"/>
+                <input name="hotelsStar'.$i.'" type="radio" class="star" value="1" title="Péssimo" disabled="disabled"/>
+                <input name="hotelsStar'.$i.'" type="radio" class="star" value="2" title="Ruim" disabled="disabled"/>
+                <input name="hotelsStar'.$i.'" type="radio" class="star" value="3" title="Regular" disabled="disabled"/>
+                <input name="hotelsStar'.$i.'" type="radio" class="star" value="4" title="Bom" disabled="disabled"/>
+                <input name="hotelsStar'.$i.'" type="radio" class="star" value="5" title="Ótimo" disabled="disabled"/>
                 </div>
                 <script>
                     $("input[name=\"hotelsStar'.$i.'\"]:nth-child('.$checked_index.')").attr("checked","checked");
@@ -178,9 +178,9 @@
     <?php endif;?>
 </div>
 <div class="column">
-    <div style="height: 200px; background: none">
+    <div style="height: 200px; background: none; border: none" >
         <?php if(isset($climateList)):?>
-        <div id="clima" style="float:left; width: 49%;margin-bottom: 0px">
+        <div id="clima" >
             <?php 
                 foreach ($climateList as $value) {
                     echo (str_replace('***', $value['Short']['name'], $value['Manager']['link']));
@@ -188,7 +188,7 @@
             ?>
         </div>
         <?php        endif;?>
-        <div style="float:left; width: 49%; height: 200px;overflow: auto; margin-left: 2%;margin-bottom: 0px">
+        <div id="ranking">
             Destinos mais buscados:
             <?php 
                 foreach ($ranking_cities as $value) {
@@ -199,12 +199,12 @@
         <div style='clear:both'></div>
     </div>
     <?php if(isset($newsList)):?>
-    <div id="news" style="height: 400px">
-        Notícias
+    <div id="news" >
+        <p>Notícias</p>
         
     </div>
     <?php endif;?>
-    <div style="">
+    <div >
        ...
     </div>
 </div>

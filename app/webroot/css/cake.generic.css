@@ -739,8 +739,14 @@ pre {
 	display:none;
 }
 .header{
-    margin: 0 auto; width: 100%; background-color: whitesmoke; height: 100px;
+    margin: 0 auto; 
+    width: 100%; 
+    background-color: whitesmoke; 
+    height: 100px;
     margin-bottom: 10px;
+    padding: 5px;
+    padding-left: 0;
+    padding-right: 0;
 }
 .header div{
     float: left;
@@ -749,29 +755,11 @@ pre {
 input[type='submit']{
     cursor: pointer;
 }
-.column{
-    float: left; width: 49%;
-}
-.column:last-child{
-    margin-left: 2%;
-}
-.column div{
-    width: 100%; background-color: whitesmoke;
-    margin-bottom: 10px;
-}
 #home{
     background-color: whitesmoke; 
     width: 30%; 
     min-height:300px; 
     margin: 0 auto; 
-/*     Fallback for web browsers that doesn't support RGBa 
-    background: rgb(255, 255, 255);
-     RGBa with 0.6 opacity 
-    background: rgba(255, 255, 255, 0.8);*/
-    border: 1px solid whitesmoke;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
 }
 #config{
     margin: 0 auto; 
@@ -790,4 +778,44 @@ input[type='submit']{
     float: left;
 }
 #config li:hover{
+}
+ body{
+    background-image: url('../img/bg.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+#content{
+    background: transparent;
+}
+.column{
+    float: left; width: 49%;
+}
+.column:last-child{
+    margin-left: 2%;
+}
+.column div{
+    width: 100%; 
+    margin-bottom: 10px;
+}
+.column div, #config, .header,#home{
+    background: rgba(255, 255, 255, 0.9);
+    color: black;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    /*background: url("../img/pattern.png") repeat scroll left top transparent;*/
+}
+.column dl dd:nth-child(4n+2), .column dl dt:nth-child(4n+1){
+    background: none;
+}
+#clima{
+    float:left; width: 49%;margin-bottom: 0px
+}
+#ranking{
+    float:left; width: 49%; height: 200px;overflow: auto; margin-left: 2%;margin-bottom: 0px
+}
+#passages,#news, #hotels{
+    min-height: 200px;
+    max-height: 400px;
+    overflow: auto;
 }
