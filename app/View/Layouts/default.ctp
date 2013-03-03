@@ -41,7 +41,7 @@ $cakeDescription = __d('cake_dev', 'Cyhelpme');
 	<div id="container">
 		<div id="header">
 			<h1 style="float: left"><?php echo $this->Html->link($cakeDescription, '/'); ?></h1>
-                        <h1 style="float: right; background: none">
+                        <h1 style="float: right;">
                             <?php 
                                 if($this->Session->read('Auth.User.id'))
                                     echo $this->Html->link('sair',array('controller'=>'users','action'=>'logout'));
@@ -61,5 +61,15 @@ $cakeDescription = __d('cake_dev', 'Cyhelpme');
 		</div>
 	</div>
 	<?php //echo $this->element('sql_dump'); ?>
+    <script>
+        $(document).ready(function(){
+                $("body").css("height", $(window).height());
+        });
+
+        // for the window resize
+        $(window).resize(function() {
+                $("body").css("height", $(window).height());
+        });
+    </script>
 </body>
 </html>

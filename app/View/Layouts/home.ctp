@@ -40,7 +40,7 @@ $cakeDescription = __d('cake_dev', 'Cyhelpme');
 	<div id="container">
 		<div id="header">
 			<h1 style="float: left"><?php echo $this->Html->link($cakeDescription, '/'); ?></h1>
-                        <h1 style="float: right;">
+                        <h1 style="float: right; ">
                             <?php 
                                 if($this->Session->read('Auth.User.id'))
                                     echo $this->Html->link('sair',array('controller'=>'users','action'=>'logout'));
@@ -50,7 +50,7 @@ $cakeDescription = __d('cake_dev', 'Cyhelpme');
                         </h1>
                         <div style="clear: both"></div>
 		</div>
-		<div id="content">
+		<div id="content" style="background: transparent">
                     <?php if($this->Session->read('Auth.User.id')): ?>
                         <ul id="config">
                             <li><?php echo $this->Html->link('cidades', array('controller' => 'cities', 'action' => 'index')); ?>

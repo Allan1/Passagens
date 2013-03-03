@@ -78,6 +78,7 @@
     input[type='submit']{
         cursor: pointer;
     }
+    
 </style>
 <div class="header">
     <div>

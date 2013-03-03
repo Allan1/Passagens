@@ -55,7 +55,7 @@ class PagesController extends AppController {
         $this->Auth->allow('display');
     }
     
-    public $layout ='config';
+    public $layout ='home';
 
     /**
  * Displays a view

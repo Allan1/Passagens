@@ -34,6 +34,7 @@ class CitiesController extends AppController {
  * @return void
  */
 	public function view($name = null, $data = null) {
+            $this->layout = 'home';
             $hotels =true;
             $news = true;
             $passages = false;
