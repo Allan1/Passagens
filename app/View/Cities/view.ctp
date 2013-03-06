@@ -40,6 +40,10 @@
         $( "#CityFrom" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
         $( "#CityTo" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
     });
+    function changeStar( $hide, $show){
+        $($hide).hide();
+        $($show).show();
+    }
     
      $(document).ready(function(){
         $(function(){ // wait for document to load
@@ -78,7 +82,11 @@
     input[type='submit']{
         cursor: pointer;
     }
-    
+    form div{
+        clear:none;
+        padding:0px;
+        
+    }
 </style>
 <div class="header">
     <div>
@@ -100,6 +108,16 @@
         <?php echo $this->Form->end('Buscar');?>
     </div>
 </div>
+<?php 
+    if(!isset($this->request->data['City'])){
+       $this->request->data['City'] = $city['City'];
+       $this->request->data['City']['hotels'] = 1;
+       $this->request->data['City']['news'] = 1;
+       $this->request->data['City']['passages'] = 0;
+       $this->request->data['City']['climate'] = 1;
+       $this->request->data['City']['destination'] = $city['City']['name'];
+    }
+?>
 <div class="column">
     <div style="height: 60px;">
         <dl>
@@ -121,6 +139,7 @@
         <?php 
         $i=0;
         foreach ($passagesList as $value) {
+            $i = $value['Manager']['id'];
             $aux = $this->Html->link($value['Manager']['name'],  preg_replace('/\*\*\*/', $value['Short']['name'], $value['Manager']['link'], 1),array('target'=>'_blank'));
             $aux = preg_replace('/\*\*\*/', $value['Short2']['name'], $aux, 1);
             $aux = preg_replace('/\*ano\*/', $city['City']['from']['ano'], $aux, 1);
@@ -132,20 +151,35 @@
             if($value['Manager']['reviews']==0)
                 $checked_index = 0;
             else
-                $checked_index = ($value['Manager']['stars']/$value['Manager']['reviews']);
+                $checked_index = (int)($value['Manager']['stars']/$value['Manager']['reviews']);
             echo '</br>'.$aux;
-            echo '<div class="clear">
-                <input name="passagesStar'.$i.'" type="radio" class="star" value="1" title="Péssimo" disabled="disabled"/>
-                <input name="passagesStar'.$i.'" type="radio" class="star" value="2" title="Ruim" disabled="disabled"/>
-                <input name="passagesStar'.$i.'" type="radio" class="star" value="3" title="Regular" disabled="disabled"/>
-                <input name="passagesStar'.$i.'" type="radio" class="star" value="4" title="Bom" disabled="disabled"/>
-                <input name="passagesStar'.$i.'" type="radio" class="star" value="5" title="Ótimo" disabled="disabled"/>
+            echo '<div id="passagesStar'.$i.'" class="clear">
+                    <input name="passagesStar'.$i.'" type="radio" class="star" value="1" title="Péssimo" disabled="disabled"/>
+                    <input name="passagesStar'.$i.'" type="radio" class="star" value="2" title="Ruim" disabled="disabled"/>
+                    <input name="passagesStar'.$i.'" type="radio" class="star" value="3" title="Regular" disabled="disabled"/>
+                    <input name="passagesStar'.$i.'" type="radio" class="star" value="4" title="Bom" disabled="disabled"/>
+                    <input name="passagesStar'.$i.'" type="radio" class="star" value="5" title="Ótimo" disabled="disabled"/>
+                    <button onclick="changeStar(\'#passagesStar'.$i.'\',\'#passagesStarRating'.$i.'\');">avaliar</button>
+                    
                 </div>
                 <script>
                     $("input[name=\"passagesStar'.$i.'\"]:nth-child('.$checked_index.')").attr("checked","checked");
-                </script>
+                </script>';
+                $data=serialize($this->request->data['City']); 
+                $encoded=htmlentities($data);    
+            echo '<div id="passagesStarRating'.$i.'" class="clear" style="display:none">
+                    <form id="CityViewStarForm'.$i.'" accept-charset="utf-8" method="post" action="/projeto/cities/view">
+                        <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="1" title="Péssimo" />
+                        <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="2" title="Ruim" />
+                        <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="3" title="Regular" />
+                        <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="4" title="Bom" />
+                        <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="5" title="Ótimo" />
+                        <input name="passagesStarRating[Manager][id]" type="hidden" value="'.$i.'" />
+                        <input type="hidden" name="City" value="'.$encoded.'"/>
+                        <button onclick="$(\'#CityViewStarForm'.$i.'\').submit();">enviar</button>
+                    </form>
+                </div>
              ';
-            $i++;
         }
         ?>
     </div>
@@ -156,23 +190,39 @@
        <?php 
        $i=0;
         foreach ($hotelsList as $value) {
+            $i = $value['Manager']['id'];
             if($value['Manager']['reviews']==0)
                 $checked_index = 0;
             else
-                $checked_index = ($value['Manager']['stars']/$value['Manager']['reviews']);
+                $checked_index = (int)($value['Manager']['stars']/$value['Manager']['reviews']);
+            
             echo "</br>".$this->Html->link($value['Manager']['name'],str_replace('***', $value['Short']['name'], $value['Manager']['link']),array('target'=>'_blank'));
-            echo '<div class="clear">
-                <input name="hotelsStar'.$i.'" type="radio" class="star" value="1" title="Péssimo" disabled="disabled"/>
-                <input name="hotelsStar'.$i.'" type="radio" class="star" value="2" title="Ruim" disabled="disabled"/>
-                <input name="hotelsStar'.$i.'" type="radio" class="star" value="3" title="Regular" disabled="disabled"/>
-                <input name="hotelsStar'.$i.'" type="radio" class="star" value="4" title="Bom" disabled="disabled"/>
-                <input name="hotelsStar'.$i.'" type="radio" class="star" value="5" title="Ótimo" disabled="disabled"/>
+            echo '<div id="hotelsStar'.$i.'" class="clear" >
+                    <input name="hotelsStar'.$i.'" type="radio" class="star" value="1" title="Péssimo" disabled="disabled"/>
+                    <input name="hotelsStar'.$i.'" type="radio" class="star" value="2" title="Ruim" disabled="disabled"/>
+                    <input name="hotelsStar'.$i.'" type="radio" class="star" value="3" title="Regular" disabled="disabled"/>
+                    <input name="hotelsStar'.$i.'" type="radio" class="star" value="4" title="Bom" disabled="disabled"/>
+                    <input name="hotelsStar'.$i.'" type="radio" class="star" value="5" title="Ótimo" disabled="disabled"/>
+                    <button onclick="changeStar(\'#hotelsStar'.$i.'\',\'#hotelsStarRating'.$i.'\');">avaliar</button>
                 </div>
                 <script>
                     $("input[name=\"hotelsStar'.$i.'\"]:nth-child('.$checked_index.')").attr("checked","checked");
-                </script>
+                </script>';
+            $data=serialize($this->request->data['City']); 
+            $encoded=htmlentities($data);    
+            echo '<div id="hotelsStarRating'.$i.'" class="clear" style="display:none">
+                    <form id="CityViewStarForm'.$i.'" accept-charset="utf-8" method="post" action="/projeto/cities/view">
+                        <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="1" title="Péssimo" />
+                        <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="2" title="Ruim" />
+                        <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="3" title="Regular" />
+                        <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="4" title="Bom" />
+                        <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="5" title="Ótimo" />
+                        <input name="hotelsStarRating[Manager][id]" type="hidden" value="'.$i.'" />
+                        <input type="hidden" name="City" value="'.$encoded.'"/>
+                        <button onclick="$(\'#CityViewStarForm'.$i.'\').submit();">enviar</button>
+                    </form>
+                </div>
              ';
-            $i++;
         }
         ?>
     </div>

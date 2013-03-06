@@ -40,13 +40,45 @@ class CitiesController extends AppController {
             $passages = false;
             $climate = TRUE;
             if($this->request->is('post')){
-                $hotels =  $this->request->data['City']['hotels'];
-                $news = $this->request->data['City']['news'];
-                $passages = $this->request->data['City']['passages'];
-                $climate = $this->request->data['City']['climate'];
-                $city = $this->City->findByName($this->request->data['City']['destination']);
-                if($passages)
-                    $city_origin = $this->City->findByName($this->request->data['City']['origin']);
+                if(is_string($this->request->data['City']))
+                    $this->request->data['City'] = unserialize($this->request->data['City']);
+                
+                if(isset($this->request->data['City'])){
+                    $hotels =  $this->request->data['City']['hotels'];
+                    $news = $this->request->data['City']['news'];
+                    $passages = $this->request->data['City']['passages'];
+                    $climate = $this->request->data['City']['climate'];
+                    $city = $this->City->findByName($this->request->data['City']['destination']);
+                    if($passages)
+                        $city_origin = $this->City->findByName($this->request->data['City']['origin']);
+                }
+                //avaliação de hoteis
+                if (isset ($this->request->data['hotelsStarRating']['Manager']['star'])) {
+                    $city = $this->City->findByName($this->request->data['City']['destination']);
+                    $manager_id = $this->request->data['hotelsStarRating']['Manager']['id'];
+                    $star = ($this->request->data['hotelsStarRating']['Manager']['star'][$manager_id]);
+                    $this->City->Short->Manager->recursive =-1;
+                    $manager = $this->City->Short->Manager->read(null,$manager_id);
+                    $manager['Manager']['stars']=$manager['Manager']['stars']+$star;
+                    $manager['Manager']['reviews']++;
+                    if($this->City->Short->Manager->save($manager))
+                        $this->Session->setFlash ('Avaliação feita com sucesso','default',array('class'=>'success'));
+                }
+                //avaliação de passagens
+                if (isset ($this->request->data['passagesStarRating']['Manager']['star'])) {
+                    debug($this->request->data);
+                    throw new Exception;
+                    $city = $this->City->findByName($this->request->data['City']['destination']);
+                    $manager_id = $this->request->data['passagesStarRating']['Manager']['id'];
+                    $star = ($this->request->data['passagesStarRating']['Manager']['star'][$manager_id]);
+                    $this->City->Short->Manager->recursive =-1;
+                    $manager = $this->City->Short->Manager->read(null,$manager_id);
+                    $manager['Manager']['stars']=$manager['Manager']['stars']+$star;
+                    $manager['Manager']['reviews']++;
+                    if($this->City->Short->Manager->save($manager))
+                        $this->Session->setFlash ('Avaliação feita com sucesso','default',array('class'=>'success'));
+                }
+                
             }
             else
                 $city = $this->City->findByName($name);
