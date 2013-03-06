@@ -136,7 +136,7 @@
     <?php if(isset($passagesList)):?>
     <div id="passages">
         Passagens
-        <?php 
+        <?php            
         $i=0;
         foreach ($passagesList as $value) {
             $i = $value['Manager']['id'];
@@ -165,8 +165,7 @@
                 <script>
                     $("input[name=\"passagesStar'.$i.'\"]:nth-child('.$checked_index.')").attr("checked","checked");
                 </script>';
-                $data=serialize($this->request->data['City']); 
-                $encoded=htmlentities($data);    
+                $data = base64_encode(serialize($this->request->data['City']));
             echo '<div id="passagesStarRating'.$i.'" class="clear" style="display:none">
                     <form id="CityViewStarForm'.$i.'" accept-charset="utf-8" method="post" action="/projeto/cities/view">
                         <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="1" title="Péssimo" />
@@ -175,7 +174,7 @@
                         <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="4" title="Bom" />
                         <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="5" title="Ótimo" />
                         <input name="passagesStarRating[Manager][id]" type="hidden" value="'.$i.'" />
-                        <input type="hidden" name="City" value="'.$encoded.'"/>
+                        <input type="hidden" name="City" value="'.$data.'"/>
                         <button onclick="$(\'#CityViewStarForm'.$i.'\').submit();">enviar</button>
                     </form>
                 </div>
@@ -208,8 +207,7 @@
                 <script>
                     $("input[name=\"hotelsStar'.$i.'\"]:nth-child('.$checked_index.')").attr("checked","checked");
                 </script>';
-            $data=serialize($this->request->data['City']); 
-            $encoded=htmlentities($data);    
+            $data = base64_encode(serialize($this->request->data['City']));
             echo '<div id="hotelsStarRating'.$i.'" class="clear" style="display:none">
                     <form id="CityViewStarForm'.$i.'" accept-charset="utf-8" method="post" action="/projeto/cities/view">
                         <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="1" title="Péssimo" />
@@ -218,7 +216,7 @@
                         <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="4" title="Bom" />
                         <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="5" title="Ótimo" />
                         <input name="hotelsStarRating[Manager][id]" type="hidden" value="'.$i.'" />
-                        <input type="hidden" name="City" value="'.$encoded.'"/>
+                        <input type="hidden" name="City" value="'.$data.'"/>
                         <button onclick="$(\'#CityViewStarForm'.$i.'\').submit();">enviar</button>
                     </form>
                 </div>

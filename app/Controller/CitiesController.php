@@ -40,8 +40,9 @@ class CitiesController extends AppController {
             $passages = false;
             $climate = TRUE;
             if($this->request->is('post')){
-                if(is_string($this->request->data['City']))
-                    $this->request->data['City'] = unserialize($this->request->data['City']);
+                if(is_string($this->request->data['City'])){
+                    $this->request->data['City'] = unserialize(base64_decode($this->request->data['City']));
+                }
                 
                 if(isset($this->request->data['City'])){
                     $hotels =  $this->request->data['City']['hotels'];
@@ -66,8 +67,6 @@ class CitiesController extends AppController {
                 }
                 //avaliação de passagens
                 if (isset ($this->request->data['passagesStarRating']['Manager']['star'])) {
-                    debug($this->request->data);
-                    throw new Exception;
                     $city = $this->City->findByName($this->request->data['City']['destination']);
                     $manager_id = $this->request->data['passagesStarRating']['Manager']['id'];
                     $star = ($this->request->data['passagesStarRating']['Manager']['star'][$manager_id]);
