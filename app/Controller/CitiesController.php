@@ -137,10 +137,10 @@ class CitiesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->City->create();
 			if ($this->City->save($this->request->data)) {
-				$this->Session->setFlash(' city foi salvo com sucesso','default',array('class'=>'success'));
+				$this->Session->setFlash('A cidade foi salva com sucesso','default',array('class'=>'success'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__(' city não pôde ser salvo. Por favor, tente novamente.'));
+				$this->Session->setFlash(__('A cidade não pôde ser salva. Por favor, tente novamente.'));
 			}
 		}
 	}
