@@ -17,6 +17,7 @@
  */
 ?>
 <?php
+//initial
 $content = explode("\n", $content);
 
 foreach ($content as $line):

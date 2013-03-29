@@ -167,7 +167,7 @@
                 </script>';
                 $data = base64_encode(serialize($this->request->data['City']));
             echo '<div id="passagesStarRating'.$i.'" class="clear" style="display:none">
-                    <form id="CityViewStarForm'.$i.'" accept-charset="utf-8" method="post" action="/projeto/cities/view">
+                    <form id="CityViewStarForm'.$i.'" accept-charset="utf-8" method="post" action="/projeto/">
                         <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="1" title="Péssimo" />
                         <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="2" title="Ruim" />
                         <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="3" title="Regular" />
@@ -209,7 +209,7 @@
                 </script>';
             $data = base64_encode(serialize($this->request->data['City']));
             echo '<div id="hotelsStarRating'.$i.'" class="clear" style="display:none">
-                    <form id="CityViewStarForm'.$i.'" accept-charset="utf-8" method="post" action="/projeto/cities/view">
+                    <form id="CityViewStarForm'.$i.'" accept-charset="utf-8" method="post" action="/projeto/">
                         <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="1" title="Péssimo" />
                         <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="2" title="Ruim" />
                         <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="3" title="Regular" />
@@ -241,7 +241,7 @@
             Destinos mais buscados:
             <?php 
                 foreach ($ranking_cities as $value) {
-                    echo '</br>'.$value[0]['rank'].'º - <a href="'.$this->webroot.'cities/view/'.$value['City']['name'].'">'.$value['City']['name'].'</a>';
+                    echo '</br>'.$value[0]['rank'].'º - <a href="'.$this->webroot.'/'.$value['City']['name'].'">'.$value['City']['name'].'</a>';
                 }
             ?>
         </div>

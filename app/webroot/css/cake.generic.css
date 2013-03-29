@@ -807,7 +807,7 @@ input[type='submit']{
     background: none;
 }
 #clima{
-    float:left; width: 49%;margin-bottom: 0px
+    float:left; width: 30%;margin-bottom: 0px
 }
 #ranking{
     float:left; width: 49%; height: 200px;overflow: auto; margin-left: 2%;margin-bottom: 0px
