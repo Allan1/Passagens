@@ -167,7 +167,7 @@
                 </script>';
                 $data = base64_encode(serialize($this->request->data['City']));
             echo '<div id="passagesStarRating'.$i.'" class="clear" style="display:none">
-                    <form id="CityViewStarForm'.$i.'" accept-charset="utf-8" method="post" action="/projeto/">
+                    <form id="CityViewStarForm'.$i.'" accept-charset="utf-8" method="post" action="/projeto/cities/view">
                         <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="1" title="Péssimo" />
                         <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="2" title="Ruim" />
                         <input name="passagesStarRating[Manager][star]['.$i.']" type="radio" class="star" value="3" title="Regular" />
@@ -209,7 +209,7 @@
                 </script>';
             $data = base64_encode(serialize($this->request->data['City']));
             echo '<div id="hotelsStarRating'.$i.'" class="clear" style="display:none">
-                    <form id="CityViewStarForm'.$i.'" accept-charset="utf-8" method="post" action="/projeto/">
+                    <form id="CityViewStarForm'.$i.'" accept-charset="utf-8" method="post" action="/projeto/cities/view">
                         <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="1" title="Péssimo" />
                         <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="2" title="Ruim" />
                         <input name="hotelsStarRating[Manager][star]['.$i.']" type="radio" class="star" value="3" title="Regular" />

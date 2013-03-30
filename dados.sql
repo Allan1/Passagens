@@ -27,14 +27,14 @@ SET time_zone = "+00:00";
 
 INSERT INTO `cities` (`id`, `name`, `state`, `access`) VALUES
 (1, 'Salvador', 'BA', 2),
-(2, 'SÃƒÂ£o Paulo', 'SP', 5),
+(2, 'São Paulo', 'SP', 5),
 (3, 'Rio de Janeiro', 'RJ', 0),
 (4, 'Belo Horizonte', 'MG', 2),
 (5, 'Porto Alegre', 'RS', 4),
 (6, 'Recife', 'PE', 0),
 (7, 'Manaus', 'AM', 1),
-(8, 'GoiÃƒÂ¢nia', 'GO', 0),
-(9, 'BrasÃƒÂ­lia', 'DF', 1);
+(8, 'Goiânia', 'GO', 0),
+(9, 'Brasília', 'DF', 1);
 
 --
 -- Extraindo dados da tabela `managers`
