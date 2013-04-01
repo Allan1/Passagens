@@ -38,14 +38,14 @@ class AppController extends Controller {
             /*
              * Setando as telas iniciais e finais do login
              */
-            'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
+            'loginRedirect' => array('controller' => 'cities', 'action' => 'index'),
             'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home')
         )
     );
 
     public function beforeFilter() {
-        //It Allow pages with the type index and view.
-        //Provisóriamente, permitindo algumas áreas acessíveis. 
+        //It allows see pages with the type index and view.
+        //Provisoriamente, permitindo algumas áreas acessíveis. 
         //$this->Auth->allow('index', 'view', 'home', 'edit');   
     }
     

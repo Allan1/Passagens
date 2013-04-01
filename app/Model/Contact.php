@@ -48,6 +48,20 @@ class Contact extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+                    
+                    
+		),
+        'image' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Este campo não pode estar vazio',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+                    
+                    
 		),
 	);
   
