@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Static content controller.
  *
@@ -18,7 +19,6 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-
 App::uses('AppController', 'Controller');
 
 /**
@@ -31,29 +31,54 @@ App::uses('AppController', 'Controller');
  */
 class ImagesController extends AppController {
 
-/**
- * Controller name
- *
- * @var string
- */
-	public $name = 'Images';
+    /**
+     * Controller name
+     *
+     * @var string
+     */
+    public $name = 'Images';
+    var $layout = 'config';
+    public $uses = array('Image');
 
-/**
- * This controller does not use a model
- *
- * @var array
- */
-	public $uses = array('Image');
-
-        /**
-     * beforeFilter method
-     * 
+    /**
+     * index method
+     *
      * @return void
      */
-    
     public function index() {
-       
+        
     }
-    
-   
+
+    /**
+     * view method
+     *
+     * @throws NotFoundException
+     * @param string $id
+     * @return void
+     */
+    public function view($id = null) {
+        
+    }
+
+    /**
+     * add method
+     *
+     * @return void
+     */
+    public function add() {
+        $file = $this->data['Upload']['file'];
+        if ($file['error'] === UPLOAD_ERR_OK) {
+            $id = String::uuid();
+            if (move_uploaded_file($file['tmp_name'], APP . 'uploads' . DS . $id)) {
+                $this->data['Upload']['id'] = $id;
+                $this->data['Upload']['user_id'] = $this->Auth->user('id');
+                $this->data['Upload']['filename'] = $file['name'];
+                $this->data['Upload']['filesize'] = $file['size'];
+                $this->data['Upload']['filemime'] = $file['type'];
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
