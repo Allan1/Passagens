@@ -1,4 +1,6 @@
 <?php
+require_once('C:\wamp\bin\php\php5.3.13\pear\PHPUnit\Autoload.php');
+
 /**
  * CakeTestSuiteDispatcher controls dispatching TestSuite web based requests.
  *
