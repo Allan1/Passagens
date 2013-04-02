@@ -1,11 +1,8 @@
-<?php echo $this->Form->create('Image'); ?>
-    <fieldset>
-        <legend><?php echo __('Trocar Background'); ?></legend>
-        
-        
-        <?php
-           echo $this->Form->input('Imagem: ', array('type' => 'file'));
-           echo $this->Form->input('bBackground',array('label'=>'Retirar background? ','type'=>'checkbox'));
-        ?>
-    </fieldset>
-    <?php echo $this->Form->end(__('Confirmar')); ?>
+<?php       
+    
+    echo $this->Form->create('Contact',array('type'=>'file'));
+    echo "Plano de fundo:<input name='uploaded' type='file'/>";
+    echo "<input type='checkbox' name='check' value='check'/>Retirar plano de fundo";
+    echo $this->Form->end('Confirmar');
+    
+?>

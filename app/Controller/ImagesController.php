@@ -1,5 +1,6 @@
 <?php
-
+    App::uses('Folder', 'Utility');
+    App::uses('File', 'Utility');
 /**
  * Static content controller.
  *
@@ -38,7 +39,7 @@ class ImagesController extends AppController {
      */
     public $name = 'Images';
     var $layout = 'config';
-    public $uses = array('Image');
+    public $uses = array('');
 
     /**
      * index method
@@ -46,7 +47,30 @@ class ImagesController extends AppController {
      * @return void
      */
     public function index() {
-        
+        if ($this->request->is('post')) {
+
+            if ($this->data) {
+                if ($this->data['check']['check']) {
+                    $file = new File(WWW_ROOT . DS . 'img' . DS . 'uploads/bg.jpg', true, 0644);
+                    $target = WWW_ROOT . DS . 'img' . DS . 'bg.jpg';
+                    if ($file->copy($target, true))
+                        echo $this->Session->setFlash("Plano de fundo removido com sucesso (Caso não tenha mudado, limpe o cache do navegador, teclas de atalho usuais: CTRL+SHIFT+R)", 'default', array('class' => 'success'));
+                    else
+                        echo $this->Session->setFlash("Plano de fundo não removido", 'default');
+                }
+            }else {
+                if (isset($_FILES['uploaded'])) {
+                    $_FILES['uploaded']['name'] = "bg.jpg";
+                    $target = WWW_ROOT . DS . 'img' . DS . basename($_FILES['uploaded']['name']);
+                    if (move_uploaded_file($_FILES['uploaded']['tmp_name'], $target)) {
+                        echo $this->Session->setFlash("Plano de fundo trocado com sucesso (Caso não tenha mudado, limpe o cache do navegador, teclas de atalho usuais: CTRL+SHIFT+R)", 'default', array('class' => 'success'));
+                        //$chmod o+rw galleries      
+                    } else {
+                        echo $this->Session->setFlash("Plano de fundo não alterado", 'default');
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -66,19 +90,7 @@ class ImagesController extends AppController {
      * @return void
      */
     public function add() {
-        $file = $this->data['Upload']['file'];
-        if ($file['error'] === UPLOAD_ERR_OK) {
-            $id = String::uuid();
-            if (move_uploaded_file($file['tmp_name'], APP . 'uploads' . DS . $id)) {
-                $this->data['Upload']['id'] = $id;
-                $this->data['Upload']['user_id'] = $this->Auth->user('id');
-                $this->data['Upload']['filename'] = $file['name'];
-                $this->data['Upload']['filesize'] = $file['size'];
-                $this->data['Upload']['filemime'] = $file['type'];
-                return true;
-            }
-        }
-        return false;
+  
     }
 
 }

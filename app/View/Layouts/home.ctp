@@ -42,7 +42,8 @@ $cakeDescription = __d('cake_dev', 'Cyhelpme');
 			<h1 style="float: left"><?php echo $this->Html->link($cakeDescription, '/'); ?></h1>
                         <h1 style="float: right; ">
                             <?php 
-                                echo $this->Html->link('contato | ',array('controller'=>'contacts'));
+                                echo $this->Html->link('contato',array('controller'=>'contacts'));
+                                echo " | ";
                                 if($this->Session->read('Auth.User.id'))
                                     echo $this->Html->link('sair',array('controller'=>'users','action'=>'logout'));
                                 else

@@ -41,7 +41,9 @@ $cakeDescription = __d('cake_dev', 'Cyhelpme');
 		<div id="header">
 			<h1 style="float: left"><?php echo $this->Html->link($cakeDescription, '/'); ?></h1>
                         <h1 style="float: right;">
-                            <?php 
+                            <?php
+                                echo $this->Html->link('contato',array('controller'=>'contacts'));
+                                echo " | ";
                                 if($this->Session->read('Auth.User.id'))
                                     echo $this->Html->link('sair',array('controller'=>'users','action'=>'logout'));
                                 else
@@ -59,7 +61,8 @@ $cakeDescription = __d('cake_dev', 'Cyhelpme');
                             </li>
                             <li><?php echo $this->Html->link('usuários', array('controller' => 'users', 'action' => 'index')); ?>
                             </li>
-
+                            <li><?php echo $this->Html->link('imagens', array('controller' => 'images', 'action' => 'index')); ?>
+                            </li>
                        </ul>
                    <?php endif;?>
 			<?php echo $this->Session->flash(); ?>
